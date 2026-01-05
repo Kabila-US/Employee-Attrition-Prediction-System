@@ -83,7 +83,3 @@ The project demonstrates that machine learning techniques can effectively predic
 ## 📌 Conclusion
 This project highlights the practical application of machine learning in **Human Resource Analytics**, showcasing how predictive models can assist organizations in improving employee retention strategies.
 
----
-
-## 👤 Author
-Developed as part of an academic / internship-oriented machine learning project.
