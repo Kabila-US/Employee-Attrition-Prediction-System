@@ -19,14 +19,14 @@ This project builds an end-to-end **supervised machine learning pipeline** to pr
 
 ##  Dataset
 
-|             Property            |             Details               |
+|             **Property**        |             **Details**                                            |
 |---|---|---|
 | Source                          |    IBM HR Analytics Employee Attrition Dataset (Kaggle)            |
-| Total Records                   |    1,470 employees                    |
-| Features (raw)                  |    35 attributes                      |
-| Features (after selection) |    29 attributes                    |
-| Target Variable                      |    Attrition (Yes = 1, No = 0)  |
-| Class Distribution                      |    ~84% No Attrition, ~16% Attrition (imbalanced)  |
+| Total Records                   |    1,470 employees                                                 |
+| Features (raw)                  |    35 attributes                                                   |
+| Features (after selection)      |    29 attributes                                                   |
+| Target Variable                 |    Attrition (Yes = 1, No = 0)                                     |
+| Class Distribution              |    ~84% No Attrition, ~16% Attrition (imbalanced)                  |
 
 
 **Key Features Used:**
