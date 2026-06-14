@@ -1,85 +1,156 @@
 # Employee Attrition Prediction System
 
----
+##  Overview
 
-## 📌 Overview
-Employee attrition is a critical challenge for organizations, leading to increased hiring costs and loss of experienced talent.  
-This project focuses on building a **machine learning–based system** to predict employee attrition by analyzing historical employee data and identifying key factors that influence turnover.
+Employee attrition — the voluntary or involuntary departure of employees — is one of the most costly challenges organizations face, leading to increased hiring expenses, loss of institutional knowledge, and reduced team productivity.
 
----
+This project builds an end-to-end **supervised machine learning pipeline** to predict whether an employee is likely to leave the organization, using historical HR data. Five classification algorithms are benchmarked and evaluated to identify the most effective model for this task.
 
-## 🎯 Objectives
-- Analyze employee data to identify attrition patterns
-- Build a predictive system for employee attrition
-- Evaluate model performance using standard metrics
-- Support data-driven decision making in HR analytics
 
----
 
-## 🧠 Project Workflow
-1. Data collection and understanding  
-2. Exploratory Data Analysis (EDA)  
-3. Data preprocessing and feature engineering  
-4. Model training and evaluation  
-5. Result analysis and interpretation  
+##  Objectives
 
----
+- Analyze and preprocess real-world HR data to uncover attrition patterns
+- Engineer meaningful features and handle class imbalance using SMOTE
+- Train, tune, and benchmark five ML classification models
+- Evaluate model performance using Accuracy, F1-Score, Precision, Recall, and ROC-AUC
+- Support data-driven HR decision-making through predictive insights
 
-## 🛠️ Tools & Technologies
-- **Python**
-- **Google Colab**
-- **Pandas**
-- **NumPy**
-- **Matplotlib / Seaborn**
-- **Scikit-learn**
 
----
+##  Dataset
 
-## 📊 Dataset Description
-The dataset consists of employee-related attributes such as:
-- Demographic details
-- Job role and department information
-- Work experience and compensation
-- Job satisfaction indicators
-- Attrition status (target variable)
+## |      Property          |         Details      |
+  **Source**                       IBM HR Analytics Employee Attrition Dataset (Kaggle) 
+  **Total Records**                1,470 employees 
+ **Features (raw)**                35 attributes 
+ **Features (after selection)**    29 attributes 
+ **Target Variable**               Attrition (Yes = 1, No = 0) 
+ **Class Distribution**            ~84% No Attrition, ~16% Attrition (imbalanced) 
 
-Data preprocessing includes handling missing values, encoding categorical features, and scaling numerical features.
+**Key Features Used:**
+- Demographics: Age, Gender, MaritalStatus
+- Job Info: JobRole, JobInvolvement, JobSatisfaction, OverTime
+- Compensation: MonthlyIncome, PercentSalaryHike
+- Experience: TotalWorkingYears, YearsAtCompany, YearsInCurrentRole
 
----
 
-## 🤖 Machine Learning Approach
-Multiple machine learning classification techniques were implemented and evaluated to predict employee attrition.  
-The models were compared using appropriate evaluation metrics, and the most suitable model was selected based on performance.
 
----
+##  Project Workflow
 
-## 📈 Evaluation Metrics
-- Accuracy  
-- Precision  
-- Recall  
-- F1-Score  
+```
+Raw Data → Feature Selection → Preprocessing → EDA → SMOTE → Model Training → Evaluation → Prediction
+```
+
+1. **Data Collection** — Loaded IBM HR dataset (CSV)
+2. **Feature Selection** — Dropped 15 irrelevant/redundant columns
+3. **Preprocessing** — Label encoding, one-hot encoding, standard scaling
+4. **Exploratory Data Analysis (EDA)** — Distribution plots, correlation analysis, attrition patterns
+5. **Class Imbalance Handling** — Applied SMOTE to oversample minority class
+6. **Model Training** — Trained 5 classification algorithms
+7. **Hyperparameter Tuning** — GridSearchCV for Decision Tree and SVM
+8. **Evaluation** — Compared models on multiple metrics
+9. **Inference** — Tested real-world sample predictions
 
 ---
 
-## ▶️ How to Run the Project
-1. Clone or download the repository  
-2. Open the `.ipynb` file in **Google Colab** or **Jupyter Notebook**  
-3. Run the cells sequentially to view analysis, training, and results  
+##  Models Implemented
+  
+|             Model            |             Key Technique                |                    Notes                  |
+|---|---|---|
+| Logistic Regression          |    Baseline linear classifier            |     Fast, interpretable                   |
+| Decision Tree                |    GridSearchCV tuned                    |     max_depth, min_samples tuned          |
+| Balanced Random Forest       |    Ensemble + SMOTE                      |     Handles class imbalance natively      |
+| Support Vector Machine (SVM) |    GridSearchCV tuned                    |     RBF & Linear kernels compared         |
+| XGBoost                      |    Gradient Boosting + scale_pos_weight  |     Best overall performance              |
 
 ---
 
-## ✅ Results
-The project demonstrates that machine learning techniques can effectively predict employee attrition and provide insights into factors influencing employee turnover.
+##  Tools & Technologies
+
+|        Category        |                             Tools                           |
+|---|---|
+| Language               |       Python 3.10                                           |
+| ML Framework           |       Scikit-learn, XGBoost, Imbalanced-learn               |
+| Data Processing        |       Pandas, NumPy                                         |
+| Visualization          |       Matplotlib, Seaborn                                   |
+| Imbalance Handling     |       SMOTE (Synthetic Minority Over-sampling Technique)    |
+| Hyperparameter Tuning  |       GridSearchCV (5-fold cross-validation)                |
+| Model Persistence      |       Joblib                                                |
+| Environment            |       Google Colab                                          |
 
 ---
 
-## 🚀 Future Enhancements
-- Hyperparameter tuning for improved accuracy  
-- Handling class imbalance using advanced techniques  
-- Deployment as a web or dashboard application  
+##  Results
+
+### XGBoost — Best Performing Model
+
+|            Metric             |       Score       |
+|---|---|
+| **Accuracy**                  |     **84.35%** |
+| **Weighted F1-Score**         |     **0.85** |
+| **Weighted Precision**        |     **0.85** |
+| **Weighted Recall**           |     **0.84** |
+
+### Classification Report (XGBoost)
+
+```
+              precision    recall  f1-score   support
+
+           0       0.91      0.91      0.91       255
+           1       0.41      0.44      0.42        39
+
+    accuracy                           0.84       294
+   macro avg       0.66      0.67      0.67       294
+weighted avg       0.85      0.84      0.85       294
+```
+
+### Confusion Matrix
+
+```
+[[231  24]
+ [ 22  17]]
+```
+
+> **Note:** The lower F1 for Class 1 (Attrition = Yes) reflects the inherent class imbalance in the dataset (~16% attrition rate). SMOTE was applied to partially mitigate this — future work will explore advanced resampling and cost-sensitive learning.
 
 ---
 
-## 📌 Conclusion
-This project highlights the practical application of machine learning in **Human Resource Analytics**, showcasing how predictive models can assist organizations in improving employee retention strategies.
+##  How to Run
 
+1. Clone the repository:
+```bash
+git clone https://github.com/Kabila-US/Employee-Attrition-Prediction-System.git
+```
+
+2. Open the notebook in Google Colab or Jupyter:
+```
+Employee_Attrition_Prediction_System.ipynb
+```
+
+3. Upload the dataset file `ATTRITION.csv` when prompted
+
+4. Run all cells sequentially to reproduce results
+
+---
+
+##  Future Enhancements
+
+- Deployment as an interactive web dashboard using Streamlit or Flask
+- Real-time attrition monitoring with live HR data integration
+- Explainability layer using SHAP values to interpret individual model predictions
+- Extending the pipeline to support multi-class attrition risk levels (Low / Medium / High)
+- Integration with HR tools like SAP or Workday for enterprise-level deployment
+
+---
+
+##  Conclusion
+
+This project demonstrates the practical application of machine learning in **Human Resource Analytics**. By systematically benchmarking five classification algorithms, handling real-world class imbalance, and applying hyperparameter tuning, the pipeline achieves **84.35% accuracy** with XGBoost as the best-performing model — providing a foundation for data-driven employee retention strategies.
+
+---
+
+##  Author
+
+**Kabila U S**
+- LinkedIn: linkedin.com/in/kabila-u-s
+- GitHub: github.com/Kabila-US
